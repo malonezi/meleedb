@@ -1,0 +1,15 @@
+369:g:1:7:winding begin
+370:g:0:11:winding loop
+372:g:1:44:punch
+373:g:1:44:punch, fully charged
+374:a:1:7:winding begin
+375:a:0:11:winding loop
+377:a:1:44:punch
+378:a:1:44:punch, fully charged
+379:g:1:59
+380:a:1:59
+381:g:1:84
+382:a:1:84
+383:g:1:13
+384:g:0:26
+385:g:0:19
