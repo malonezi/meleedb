@@ -26,6 +26,14 @@ int main(int argc, char* argv[]) {
     char initseq[] = {StartMask, UpMask, YMask|DownMask, StartMask};
     char seq[] = {StartMask, XMask|DownMask, XMask|DownMask, XMask|DownMask, XMask|DownMask, StartMask};
 
+    for (int i = 0; i < 4; i++) {
+        fputc(initseq[i], file);
+        for (int bit = 1; bit < 4; bit++) fputc('\0', file);
+        for (int bit = 4; bit < 8; bit++) fputc('', file);
+
+        for (int port = 2; port <= 4; port++) fputs(blank, file);
+    }
+
     char c;
     int count = 0;
     while ((c = getchar()) != EOF) {
