@@ -5,7 +5,7 @@ from sys import argv
 (StartMask, AMask, BMask, XMask,
     YMask, ZMask, UpMask, DownMask) = (1 << x for x in range(8))
 
-blank = "".join(chr(x) for x in (0, 0, 0, 0, 128, 128, 128, 128))
+blank = "".join(chr(x) for x in (0, 0, 0, 0, 0x80, 0x80, 0x80, 0x80))
 
 
 def __main__():
@@ -20,8 +20,7 @@ def __main__():
         data = open(infile, "r").read()
 
         f.write(data[0:0x100])                   # header
-        # first 123 frames: "ready, go"
-        f.write(data[0x100:0x100 + 123 * 0x20])
+        f.write(data[0x100:0x100 + 123 * 0x20])  # first 123 frames: "ready, go"
 
         for frame in range(123, (len(data) - 0x100) // 0x20 + 1):
             f.write(data[0x100 + 0x20 * frame:0x100 + 0x20 * (frame + 1)])
