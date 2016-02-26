@@ -22,6 +22,12 @@ def __main__():
         f.write(data[0:0x100])                   # header
         f.write(data[0x100:0x100 + 123 * 0x20])  # first 123 frames: "ready, go"
 
+        for input in (StartMask, UpMask, YMask | DownMask, StartMask):
+            f.write(chr(input))
+            f.write(blank[1:])
+            for port in range(2, 4 + 1):
+                f.write(blank)
+
         for frame in range(123, (len(data) - 0x100) // 0x20 + 1):
             f.write(data[0x100 + 0x20 * frame:0x100 + 0x20 * (frame + 1)])
             for input in (StartMask, XMask | DownMask, XMask | DownMask, XMask | DownMask, XMask | DownMask, StartMask):
