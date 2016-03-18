@@ -14,15 +14,20 @@ while vid.grab():
 
     # every 30 seconds
     if vid.get(1) % (60 * 30) == 0:
+        print vid.get(1), "frames"
         hsv = cv2.convertScaleAbs(avg / vid.get(1))
-        
+
         # extract saturation channel
         hsv = cv2.cvtColor(hsv, cv2.COLOR_RGB2HSV)[:, :, 1]
 
-        # threshold for greys
-        retval, hsv = cv2.threshold(hsv, 100, 0xFF, cv2.THRESH_TOZERO)
-        retval, hsv = cv2.threshold(hsv, 156, 0xFF, cv2.THRESH_BINARY_INV)
-
         cv2.imshow("b", hsv)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+        # threshold for greys
+        _, bin = cv2.threshold(hsv, 114,  0xFF, cv2.THRESH_TOZERO)
+        _, bin = cv2.threshold(bin, 142, 0xFF, cv2.THRESH_BINARY_INV)
+
+        cv2.imshow("b", bin)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
